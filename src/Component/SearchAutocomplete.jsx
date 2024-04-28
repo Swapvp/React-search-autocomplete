@@ -35,11 +35,13 @@ export default function SearchAutocomplete() {
   async function fetchListOfUsers() {
     try {
       setLoading(true);
-      const response = await fetch("https://dummyjson.com/users");
+      const response = await fetch(
+        "https://countriesnow.space/api/v0.1/countries"
+      );
       const data = await response.json();
 
-      if (data && data.users && data.users.length) {
-        setUsers(data.users.map((userItem) => userItem.firstName));
+      if (data && data.data && data.data.length) {
+        setUsers(data.data.map((userItem) => userItem.country));
         setLoading(false);
         setError(null);
       }
@@ -62,18 +64,20 @@ export default function SearchAutocomplete() {
         <h1>Loading Data ! Please wait</h1>
       ) : (
         <div className="input-container">
-          <h4>Search Users</h4>
+          <h4>Search Country</h4>
           <input
             value={searchParam}
             name="search-users"
-            placeholder="Search Users here..."
+            placeholder="Search countries..."
             onChange={handleChange}
           />
         </div>
       )}
 
       {showDropdown && (
-        <Suggestions handleClick={handleClick} data={filteredUsers} />
+        <div className="input-container">
+          <Suggestions handleClick={handleClick} data={filteredUsers} />
+        </div>
       )}
     </div>
   );

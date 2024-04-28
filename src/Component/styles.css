@@ -1,3 +1,7 @@
 .input-container{
     text-align: center;
 }
+
+.list-item {
+    list-style-type: none;
+}
